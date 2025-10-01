@@ -11,7 +11,8 @@ class flyController extends Controller
      */
     public function index()
     {
-        //
+        $flies = Fly::all();
+        return view('flies.index');
     }
 
     /**
@@ -19,7 +20,7 @@ class flyController extends Controller
      */
     public function create()
     {
-        //
+        return view('flies.create');
     }
 
     /**
@@ -27,23 +28,28 @@ class flyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required | text',
+            'category' => 'required|',
+            'status' => 'required|enum:analysis,approved,rejected',
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Fly $fly)
     {
-        //
+        return view('flies.show', compact('fly'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Fly $fly)
     {
-        //
+        return view('flies.edit', compact('fly'));
     }
 
     /**
@@ -51,14 +57,21 @@ class flyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required | text',
+            'category' => 'required|',
+            'status' => 'required|enum:analysis,approved,rejected',
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Fly $fly)
     {
-        //
+        $fly->delete();
+        return redirect()->route('flies.index')
+            ->with('success', 'Fly deleted successfully');
     }
 }
