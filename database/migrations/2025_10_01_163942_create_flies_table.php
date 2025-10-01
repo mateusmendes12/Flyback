@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('flies', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description');
+            $table->string('category');
+            $table->enum('status', ['analysis', 'approved', 'rejected'])->default('analysis');
             $table->timestamps();
         });
     }
