@@ -13,7 +13,6 @@
 
         <!-- Logo -->
         <a href="{{ route('welcome',[],false) }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-          {{-- <img src="{{ asset('flybacklogo.png',[],false) }}" class="h-8" alt="Logo" /> --}}
           <span class="self-center text-2xl text-green-600 font-semibold whitespace-nowrap dark:text-white">Flyback</span>
         </a>
 
@@ -30,9 +29,9 @@
         </button>
 
         <!-- Links / Menu -->
-        <div :class="openMobile ? 'block' : 'hidden md:block'" class="w-full md:w-auto ml-auto" id="navbar-menu">
+        <div :class="openMobile ? 'block' : 'hidden'" class="w-full md:w-auto ml-auto md:block" id="navbar-menu">
           <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 
-                     md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white 
+                     md:space-x-8 md:flex-row md:mt-0 md:border-0 md:bg-white 
                      dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
 
             <!-- Links comuns -->
@@ -48,7 +47,6 @@
               <div @mouseenter="open = true" @mouseleave="open = false" class="w-full">
                 <button 
                   class="group flex items-center space-x-2 w-44 py-2 px-3 text-gray-900 hover:text-green-600 md:p-0 dark:text-white focus:outline-none">
-                  <!-- Ícone de usuário -->
                   <svg class="w-6 h-6 text-gray-800 group-hover:text-green-600 dark:text-white" aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -56,17 +54,18 @@
                   </svg>
                   <span>Visitante</span>
                 </button>
+                
                 <div x-show="open" x-transition
                      class="absolute right-0 mt-2 w-44 bg-white dark:bg-gray-700 rounded-lg shadow-lg z-50">
                   <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
                     <li>
-                      <a href="/login"
+                      <a href="{{ route('auth.login',[],false) }}"
                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                         Login
                       </a>
                     </li>
                     <li>
-                      <a href="/register"
+                      <a href="{{ route('users.create',[],false) }}"
                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                         Criar conta
                       </a>
@@ -78,20 +77,18 @@
 
             <!-- Mobile Links diretos Visitante -->
             <li class="block md:hidden mt-2 border-t border-gray-200 pt-2 dark:border-gray-600">
-                <a href="/login"
+                <a href="{{ route('auth.login',[],false) }}"
                     class="flex items-center py-2 px-3 text-gray-900 hover:text-green-600 dark:text-white">
-                    <!-- Ícone Login -->
-                    <svg class="w-5 h-5 mr-2 text-gray-800 hover:text-green-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H8m12 0-4 4m4-4-4-4M9 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h2"/>
+                    <svg class="w-5 h-5 mr-2 text-gray-800 hover:text-green-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H8m12 0-4 4m4-4-4-4M9 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h2"/>
                     </svg>
                     Login
                 </a>
-                <a href="/register"
+                <a href="{{ route('users.create',[],false) }}"
                     class="flex items-center py-2 px-3 text-gray-900 hover:text-green-600 dark:text-white">
-                    <!-- Ícone Criar Conta -->
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 4v16m8-8H4"></path>
                     </svg>
                     Criar Conta

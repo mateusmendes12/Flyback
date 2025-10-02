@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\User;
 class userController extends Controller
 {
     /**
@@ -11,7 +11,8 @@ class userController extends Controller
      */
     public function index()
     {
-        //
+        $users=$user::paginate(10);
+        return view('users.index');
     }
 
     /**
@@ -19,7 +20,7 @@ class userController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -27,7 +28,19 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required|email|unique:users,email',
+            'password'=>'required|min:6'
+        ]);
+
+        $user=new User();
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->password=bcrypt($request->password);
+        $user->save();
+
+      return redirect()->route('auth.login')->with('success','User registered successfully. Please login.');
     }
 
     /**

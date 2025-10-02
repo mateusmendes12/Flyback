@@ -9,7 +9,7 @@
         <p class="text-lg text-green-700 break-words">
             Aqui estão as sugestões enviadas por outros colaboradores. Sinta-se à vontade para navegar, avaliar e comentar nas ideias que achar interessantes!
         </p>
-        @foreach (fly as flies )
+        @foreach ($flies as $fly )
         
 
                     <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
@@ -31,3 +31,4 @@
 </div>
 <div class="container mx-auto p-4"> 
 
+@endsection

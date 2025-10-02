@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Fly;
 
 class flyController extends Controller
 {
@@ -12,7 +13,7 @@ class flyController extends Controller
     public function index()
     {
         $flies = Fly::all();
-        return view('flies.index');
+        return view('flies.index', compact('flies'));
     }
 
     /**
