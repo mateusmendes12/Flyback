@@ -3,8 +3,8 @@
 @section('title','Veja as sugestões de outros colaboradores')
 
 @section('content')
-<div class="text-center">
-    <h1 class="text-3xl font-bold mb-4 text-green-600">Veja as sugestões de outros colaboradores</h1>
+<div class="mt-5">
+    <h1 class="text-2xl text-center font-bold mb-4 text-green-600">Veja as sugestões de outros colaboradores</h1>
     <div class="mb-6 p-10 rounded-2xl shadow-2xl bg-gray-100 pb-4 max-w-5xl mx-auto flex items-center justify-center">
         <p class="text-lg text-green-700 break-words">
             Aqui estão as sugestões enviadas por outros colaboradores. Sinta-se à vontade para navegar, avaliar e comentar nas ideias que achar interessantes!
