@@ -12,7 +12,7 @@ class flyController extends Controller
      */
     public function index()
     {
-        $flies = Fly::all();
+        $flies = Fly::paginate(10);
         return view('flies.index', compact('flies'));
     }
 
@@ -51,6 +51,10 @@ class flyController extends Controller
     public function edit(Fly $fly)
     {
         return view('flies.edit', compact('fly'));
+        if(!Fly::find($fly)){
+            return redirect()->route('flies.index')
+                ->with('error', 'Fly not found');
+        }
     }
 
     /**
