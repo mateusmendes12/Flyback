@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('category');
             $table->enum('status', ['analysis', 'approved', 'rejected'])->default('analysis');
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

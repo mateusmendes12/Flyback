@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Bem-vindo ao Flyback')
+@section('header', 'Bem-vindo ao Flyback')
 
 @section('content')
 <div class="text-center">

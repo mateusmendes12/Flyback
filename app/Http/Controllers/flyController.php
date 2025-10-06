@@ -24,22 +24,27 @@ class flyController extends Controller
         return view('flies.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required | text',
-            'category' => 'required|',
-            'status' => 'required|enum:analysis,approved,rejected',
-        ]);
-    }
+{
+    $request->validate([
+        'title' => 'required|string',
+        'description' => 'required|string',
+        'category' => 'required|string',
+        'status' => 'string', // opcional, se não enviado usaremos default
+    ]);
 
-    /**
-     * Display the specified resource.
-     */
+    Fly::create([
+        'title' => $request->title,
+        'description' => $request->description,
+        'category' => $request->category,
+        'status' => $request->status ?? 'analysis',
+        'user_id'=> auth()->id(),
+    ]);
+
+    return redirect()->route('flies.index')
+        ->with('success', 'Fly created successfully.');
+}
+
     public function show(Fly $fly)
     {
         return view('flies.show', compact('fly'));

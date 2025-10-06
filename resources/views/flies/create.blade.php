@@ -3,7 +3,7 @@
 @section('content')
 <div class="max-w-3xl mx-auto p-8 bg-white rounded-xl shadow-lg mt-10">
     <h1 class="text-3xl font-extrabold mb-8 text-green-600 text-center">Crie sua Fly</h1>
-    <form action="{{ route('flies.create', [], false) }}" method="POST" class="space-y-6">
+    <form action="{{ route('flies.store', [], false) }}" method="POST" class="space-y-6">
         @csrf
         <div>
             <label for="title" class="block text-sm font-semibold text-gray-800 mb-2">Título</label>
