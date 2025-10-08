@@ -36,6 +36,7 @@
             @if ($flies->count() > 0)
                 @foreach ($flies as $fly)
                     <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-between">
+                          
                         <!-- Título -->
                         <h5 class="mb-3 text-xl sm:text-2xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-green-600 transition">
                             {{ $fly->title }}
@@ -59,7 +60,8 @@
 
                 <!-- Paginação centralizada -->
                 <div class="mt-8 flex justify-center">
-                    {{ $flies->links('pagination::tailwind') }}
+                  {{ $flies->links('pagination::tailwind') }}
+
                 </div>
             @else
                 <div class="col-span-full flex justify-center">

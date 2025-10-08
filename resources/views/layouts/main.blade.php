@@ -95,7 +95,7 @@
                 <div x-show="open" x-transition
                      class="absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg z-50">
                   <ul class="py-2 text-sm text-gray-700">
-                    <li><a href="{{ route('auth.login', [], false) }}" class="block px-4 py-2 hover:bg-gray-100">Login</a></li>
+                    <li><a href="{{ route('login', [], false) }}" class="block px-4 py-2 hover:bg-gray-100">Login</a></li>
                     <li><a href="{{ route('users.create', [], false) }}" class="block px-4 py-2 hover:bg-gray-100">Criar Conta</a></li>
                   </ul>
                 </div>
@@ -104,7 +104,7 @@
 
             <!-- Visitante Mobile -->
             <li class="block md:hidden border-t pt-2 mt-2">
-              <a href="{{ route('auth.login', [], false) }}" class="block py-2 px-3 hover:text-green-600">Login</a>
+              <a href="{{ route('login', [], false) }}" class="block py-2 px-3 hover:text-green-600">Login</a>
               <a href="{{ route('users.create', [], false) }}" class="block py-2 px-3 hover:text-green-600">Criar Conta</a>
             </li>
           @endguest

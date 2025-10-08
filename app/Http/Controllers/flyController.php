@@ -10,9 +10,12 @@ class flyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $flies = Fly::paginate(10);
+        $flies = Fly::paginate(10)->appends($request->except('page'));
+
+    // 👉 Força o caminho relativo (mantém a mesma URL da página atual)
+        $flies->withPath($request->url());
         return view('flies.index', compact('flies'));
     }
 
