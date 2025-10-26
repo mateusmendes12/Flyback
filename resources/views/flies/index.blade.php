@@ -56,10 +56,13 @@
                             </svg>
                         </a>
                     </div>
+
+
                 @endforeach
 
                 <!-- Paginação centralizada -->
-                <div class="mt-8 flex justify-center">
+                <div class="mt-8 flex justify-start w-full mt-30">
+                    
                   {{ $flies->links('pagination::tailwind') }}
 
                 </div>

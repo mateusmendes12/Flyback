@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Pagination\Paginator;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -20,7 +21,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
      if ($this->app->runningInConsole() === false) {
-        URL::forceRootUrl(request()->getSchemeAndHttpHost());
+        URL::forceRootUrl('');
+
+        // Força HTTPS (o Codespaces é sempre HTTPS)
+        
     }
+    Paginator::useTailwind();
     }
 }

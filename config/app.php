@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://symmetrical-fortnight-g4vxp77p4qr6h9jxp-80.app.github.dev'),
 
     /*
     |--------------------------------------------------------------------------
