@@ -6,7 +6,7 @@
     <p class="text-gray-700 mb-6">{{ $fly->description }}</p>
     <p class="text-sm text-gray-500">Categoria: {{ $fly->category }}</p>
     <p class="text-sm text-gray-500">Criado em: {{ $fly->created_at->format('d/m/Y H:i') }}</p>
-    <x-like_unlike :fly="$fly" />
+    
     @if ( auth()->check() && auth()->user()->id === $fly->user_id)
         <x-fly-edit :fly="$fly" />
     
