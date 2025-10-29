@@ -13,10 +13,18 @@ class flyController extends Controller
     public function index(Request $request)
     {
         $flies = Fly::paginate(10)->appends($request->except('page'));
+        //retorna também os parâmetros de busca na 
+        // paginação
+        // $pages=[];
+        // for($page=1; $page <= $flies->lastPage(); $page++){
+        //     $pages[]=$page;
 
-    // 👉 Força o caminho relativo (mantém a mesma URL da página atual)
-        $flies->withPath($request->url());
-        
+        // }
+
+        // pode retornar quantos likes e deslikes uma fly tem
+
+         // usa query builder
+         
         return view('flies.index', compact('flies'));
     }
 

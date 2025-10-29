@@ -40,29 +40,29 @@ class userController extends Controller
         $user->password=bcrypt($request->password);
         $user->save();
 
-      return redirect()->route('auth.login')->with('success','User registered successfully. Please login.');
+      return redirect()->route('login')->with('success','User registered successfully. Please login.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        //
+        return view('users.show', compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        return view('users.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
         //
     }
