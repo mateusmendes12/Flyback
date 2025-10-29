@@ -16,6 +16,7 @@ class flyController extends Controller
 
     // 👉 Força o caminho relativo (mantém a mesma URL da página atual)
         $flies->withPath($request->url());
+        
         return view('flies.index', compact('flies'));
     }
 

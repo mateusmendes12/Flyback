@@ -19,6 +19,7 @@
 
       <!-- Logo -->
       <a href="{{ route('welcome', [], false) }}" class="flex items-center space-x-2">
+        
         <span class="text-2xl text-green-600 font-semibold">Flyback</span>
       </a>
 
