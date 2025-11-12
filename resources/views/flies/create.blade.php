@@ -28,25 +28,28 @@
             ></textarea>
         </div>
         <div>
-            <label for="category" class="block text-sm font-semibold text-gray-800 mb-2">Categoria</label>
-            <select
-                name="category"
-                id="category"
-                required
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+            <label for="departamentos" class="block text-sm font- text-white mb-2">Departamentos Envolvidos</label>
+            <select 
+            name="departament_id"
+            id="departament_id"
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
             >
-                <option value="">Selecione uma categoria</option>
-                <option value="Tecnologia">Tecnologia</option>
-                <option value="Educação">Educação</option>
-                <option value="Saúde">Saúde</option>
-                <option value="Meio Ambiente">Meio Ambiente</option>
-                <option value="Outro">Outro</option>
-            </select>
-        </div>
+                <option value="" disabled selected>Selecione o departamento</option>
+                <option value="RH">Recursos Humanos</option>
+                <option value="TI">Tecnologia da Informação</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Vendas">Vendas</option>
+                <option value="Financeiro">Financeiro</option>
+                <option value="Operações">Operações</option>
+                <option value="Atendimento ao Cliente">Atendimento ao Cliente</option>
+                <option value="Jurídico">Jurídico</option>
+        </select> 
         <div class="flex justify-center">
+           
             <button
                 type="submit"
-                class="bg-green-600 text-white font-semibold px-10 py-3 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-400 transition"
+                class="bg-green-600 mt-10 text-white font-semibold px-10 py-3 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-400 transition"
             >
                 Enviar
             </button>

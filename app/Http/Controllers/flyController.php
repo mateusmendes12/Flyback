@@ -4,46 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Fly;
-use Illuminate\Support\Facades\DB;
 
-class flyController extends Controller
+class FlyController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
-
-    
+    public function index()
     {
-        $flies=Fly::paginate(10);
-      
-        // //retorna também os parâmetros de busca na 
-        // // paginação
-        // // $pages=[];
-        // // for($page=1; $page <= $flies->lastPage(); $page++){
-        // //     $pages[]=$page;
-
-        // // }
-
-        // // pode retornar quantos likes e deslikes uma fly tem
-
-        //  // usa query builder
-         
-        return view('flies.index', compact('flies'));
-// $flies = DB::table('flies')
-//     ->join('fly_votes', 'flies.id', '=', 'fly_votes.fly_id')
-//     ->select(
-//         'flies.id',
-//         'flies.title',
-//         'flies.description',  // Incluindo 'description'
-//         'flies.created_at',
-//         'flies.updated_at',
-//         DB::raw('SUM(CASE WHEN fly_votes.type_vote = "like" THEN 1 ELSE 0 END) as likes_count'),
-//         DB::raw('SUM(CASE WHEN fly_votes.type_vote = "dislike" THEN 1 ELSE 0 END) as dislikes_count')
-//     )
-//     ->groupBy('flies.id', 'flies.title', 'flies.description', 'flies.created_at', 'flies.updated_at')  // Incluindo todas as colunas
-//     ->paginate(10);
-
+        // Lista flies com contagem de likes e dislikes
+        $flies = Fly::withCount([
+            'votes as likes_count' => function ($query) {
+                $query->where('type_vote', 'like');
+            },
+            'votes as dislikes_count' => function ($query) {
+                $query->where('type_vote', 'dislike');
+            }
+        ])->orderBy('likes_count', 'desc')->get();
 
         return view('flies.index', compact('flies'));
     }
@@ -56,29 +33,45 @@ class flyController extends Controller
         return view('flies.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
-{
-    $request->validate([
-        'title' => 'required|string',
-        'description' => 'required|string',
-        'category' => 'required|string',
-        'status' => 'string', // opcional, se não enviado usaremos default
-    ]);
+    {
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'status' => 'string', 
+            'departament_id' => 'required|exists:departaments,id',
+        ]);
 
-    Fly::create([
-        'title' => $request->title,
-        'description' => $request->description,
-        'category' => $request->category,
-        'status' => $request->status ?? 'analysis',
-        'user_id'=> auth()->id(),
-    ]);
+        Fly::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => $request->status ?? 'analysis',
+            'user_id'=> auth()->id(),
+            'departament_id' => $request->departament_id,
+        ]);
 
-    return redirect()->route('flies.index')
-        ->with('success', 'Fly created successfully.');
-}
+        return redirect()->route('flies.index')
+            ->with('success', 'Fly created successfully.');
+    }
 
+    /**
+     * Display the specified resource.
+     */
     public function show(Fly $fly)
     {
+        // Carrega a contagem de votos para esta fly
+        $fly->loadCount([
+            'votes as likes_count' => function ($query) {
+                $query->where('type_vote', 'like');
+            },
+            'votes as dislikes_count' => function ($query) {
+                $query->where('type_vote', 'dislike');
+            }
+        ]);
+
         return view('flies.show', compact('fly'));
     }
 
@@ -88,23 +81,29 @@ class flyController extends Controller
     public function edit(Fly $fly)
     {
         return view('flies.edit', compact('fly'));
-        if(!Fly::find($fly)){
-            return redirect()->route('flies.index')
-                ->with('error', 'Fly not found');
-        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Fly $fly)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required | text',
-            'category' => 'required|',
-            'status' => 'required|enum:analysis,approved,rejected',
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'status' => 'required|in:analysis,approved,rejected',
+            'departament_id' => 'required|exists:departaments,id',
         ]);
+
+        $fly->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => $request->status,
+            'departament_id' => $request->departament_id,
+        ]);
+
+        return redirect()->route('flies.index')
+            ->with('success', 'Fly updated successfully.');
     }
 
     /**
@@ -113,7 +112,8 @@ class flyController extends Controller
     public function destroy(Fly $fly)
     {
         $fly->delete();
+
         return redirect()->route('flies.index')
-            ->with('success', 'Fly deleted successfully');
+            ->with('success', 'Fly deleted successfully.');
     }
 }
