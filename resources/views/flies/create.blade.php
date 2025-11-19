@@ -29,22 +29,16 @@
         </div>
         <div>
             <label for="departamentos" class="block text-sm font- text-white mb-2">Departamentos Envolvidos</label>
-            <select 
-            name="departament_id"
-            id="departament_id"
-            required
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
-            >
-                <option value="" disabled selected>Selecione o departamento</option>
-                <option value="RH">Recursos Humanos</option>
-                <option value="TI">Tecnologia da Informação</option>
-                <option value="Marketing">Marketing</option>
-                <option value="Vendas">Vendas</option>
-                <option value="Financeiro">Financeiro</option>
-                <option value="Operações">Operações</option>
-                <option value="Atendimento ao Cliente">Atendimento ao Cliente</option>
-                <option value="Jurídico">Jurídico</option>
-        </select> 
+           <select name="departament_id" class="form-control">
+                <option value="">Selecione um departamento</option>
+
+                @foreach ($departaments as $departament)
+                    <option value="{{ $departament->id }}">
+                        {{ $departament->name_dp }}
+                    </option>
+                @endforeach
+
+            </select>
         <div class="flex justify-center">
            
             <button

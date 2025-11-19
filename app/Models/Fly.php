@@ -14,6 +14,7 @@ class Fly extends Model
         'description',
         'status',
         'user_id',
+        'departament_id',
     ];
     public function user()
     {

@@ -1,4 +1,5 @@
 <div class="mt-6 ml-10 flex justify-center items-center space-x-4">
+    
 
     <!-- Botão Curtir -->
     <button x-data="{ liked: false }"

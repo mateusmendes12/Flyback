@@ -12,6 +12,10 @@ class FlyVotes extends Model
         'user_id',
         'type_vote',
     ];
+    public function fly()
+{
+    return $this->belongsTo(Fly::class);
+}
     public function user()
     {
         return $this->belongsTo(User::class);
