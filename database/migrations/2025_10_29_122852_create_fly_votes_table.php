@@ -12,13 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('fly_votes', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('fly_id');
-           
-            $table->enum('type_vote', ['like', 'unlike']);
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreign('fly_id')->references('id')->on('flies')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
+                $table->id();
+                $table->unsignedBigInteger('fly_id');
+                $table->enum('type_vote', ['like', 'unlike']);
+                $table->foreignId('user_id')->constrained()->onDelete('cascade');
+
+                // impede voto duplicado
+                $table->unique(['fly_id', 'user_id']);
+
+                $table->foreign('fly_id')
+                    ->references('id')->on('flies')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+
+                $table->timestamps();
         });
     }
 

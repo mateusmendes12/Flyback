@@ -21,12 +21,7 @@ class FlyController extends Controller
      */
     public function index()
     {
-        $flies = Fly::withCount([
-            'votes as likes_count' => fn($q) => $q->where('type_vote', 'like'),
-            'votes as dislikes_count' => fn($q) => $q->where('type_vote', 'dislike'),
-        ])
-        ->orderByDesc('likes_count')
-        ->get();
+       $flies= Fly::all();
 
         return view('flies.index', compact('flies'));
     }

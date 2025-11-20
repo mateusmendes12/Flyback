@@ -7,15 +7,16 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware([\Illuminate\Auth\Middleware\Authenticate::class])->group(function () {
    Route::resource('flies', App\Http\Controllers\flyController::class);
+   Route::post('flies/{fly}/vote', [App\Http\Controllers\VoteController::class, 'vote'])->name('flies.vote');
 });
 
 Route::resource('users', App\Http\Controllers\userController::class)->only([
     'create', 'store'
 ]);
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware([\Illuminate\Auth\Middleware\Authenticate::class])->group(function () {
     Route::get('users', [userController::class, 'index'])->name('users.index');
     Route::get('users/{user}/edit', [userController::class, 'edit'])->name('users.edit');
     Route::put('users/{user}', [userController::class, 'update'])->name('users.update');

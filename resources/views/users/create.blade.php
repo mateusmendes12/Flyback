@@ -10,20 +10,31 @@
         Criar Conta
       </h2>
 
+      <!-- Exibição de erros -->
+      @if($errors->any())
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+        <ul class="list-disc list-inside">
+          @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+      @endif
+
       <form class="mt-8 space-y-6" method="POST" action="{{ route('users.store', [], false) }}">
         @csrf
 
         <!-- Nome -->
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700">Seu Nome:</label>
-          <input type="text" name="name" id="name" placeholder="Seu nome" required
+          <input type="text" name="name" id="name" placeholder="Seu nome" value="{{ old('name') }}" required
             class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-sm text-gray-900">
         </div>
 
         <!-- Email -->
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700">Seu email:</label>
-          <input type="email" name="email" id="email" placeholder="name@company.com" required
+          <input type="email" name="email" id="email" placeholder="name@company.com" value="{{ old('email') }}" required
             class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-sm text-gray-900">
         </div>
 
@@ -36,8 +47,8 @@
 
         <!-- Confirmar Senha -->
         <div>
-          <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirmar Senha</label>
-          <input type="password" name="confirm-password" id="confirm-password" placeholder="••••••••" required
+          <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirmar Senha</label>
+          <input type="password" name="password_confirmation" id="password_confirmation" placeholder="••••••••" required
             class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-sm text-gray-900">
         </div>
 
