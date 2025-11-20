@@ -3,20 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\FlyVotes;
 class Fly extends Model
 {
-    //
-
-    protected $fillable = [
-        'title',
-        'description',
-        'category',
-        'status',
-        'user_id',
-    ];
-    public function user()
+    // Relação com votos
+    public function votes()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(FlyVotes::class);
+    }
+
+    // Contagem de likes
+    public function getLikesCountAttribute()
+    {
+        return $this->votes()->where('type_vote', 'like')->count();
+    }
+
+    // Contagem de unlikes
+    public function getUnlikesCountAttribute()
+    {
+        return $this->votes()->where('type_vote', 'unlike')->count();
     }
 }

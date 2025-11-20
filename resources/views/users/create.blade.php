@@ -1,71 +1,53 @@
 @extends('layouts.main')
-
-@section('title', 'Criar Conta')
-
+@section('title', 'Crie sua Fly')
 @section('content')
-<section class="bg-gray-50 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-  <div class="w-full max-w-md space-y-8">
-    <div class="bg-white rounded-lg shadow-xl px-6 py-8 sm:px-10">
-      <h2 class="text-3xl font-bold text-center text-gray-900">
-        Criar Conta
-      </h2>
-
-      <form class="mt-8 space-y-6" method="POST" action="{{ route('users.store', [], false) }}">
+<div class="max-w-3xl mx-auto p-8 bg-white rounded-xl shadow-lg mt-10">
+    <h1 class="text-3xl font-extrabold mb-8 text-green-600 text-center">Crie sua Fly</h1>
+    <form action="{{ route('flies.store', [], false) }}" method="POST" class="space-y-6">
         @csrf
-
-        <!-- Nome -->
         <div>
-          <label for="name" class="block text-sm font-medium text-gray-700">Seu Nome:</label>
-          <input type="text" name="name" id="name" placeholder="Seu nome" required
-            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-sm text-gray-900">
+            <label for="title" class="block text-sm font-semibold text-gray-800 mb-2">Título</label>
+            <input
+                type="text"
+                name="title"
+                id="title"
+                required
+                placeholder="Digite o título da sua Fly"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+            >
         </div>
-
-        <!-- Email -->
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700">Seu email:</label>
-          <input type="email" name="email" id="email" placeholder="name@company.com" required
-            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-sm text-gray-900">
+            <label for="description" class="block text-sm font-semibold text-gray-800 mb-2">Descrição</label>
+            <textarea
+                name="description"
+                id="description"
+                rows="5"
+                required
+                placeholder="Descreva sua ideia aqui"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition resize-none"
+            ></textarea>
         </div>
-
-        <!-- Senha -->
         <div>
-          <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
-          <input type="password" name="password" id="password" placeholder="••••••••" required
-            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-sm text-gray-900">
+            <label for="departamentos" class="block text-sm font- text-white mb-2">Departamentos Envolvidos</label>
+           <select name="departament_id" class="form-control">
+                <option value="">Selecione um departamento</option>
+
+                @foreach ($departaments as $departament)
+                    <option value="{{ $departament->id }}">
+                        {{ $departament->name_dp }}
+                    </option>
+                @endforeach
+
+            </select>
+        <div class="flex justify-center">
+           
+            <button
+                type="submit"
+                class="bg-green-600 mt-10 text-white font-semibold px-10 py-3 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-400 transition"
+            >
+                Enviar
+            </button>
         </div>
-
-        <!-- Confirmar Senha -->
-        <div>
-          <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirmar Senha</label>
-          <input type="password" name="confirm-password" id="confirm-password" placeholder="••••••••" required
-            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-sm text-gray-900">
-        </div>
-
-        <!-- Termos de Uso -->
-        <div class="flex items-start">
-          <div class="flex items-center h-5">
-            <input id="terms" aria-describedby="terms" type="checkbox" required
-              class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-green-600">
-          </div>
-          <div class="ml-3 text-sm">
-            <label for="terms" class="font-light text-gray-500">
-              Eu aceito os <a href="#" class="font-medium text-green-600 hover:underline">Termos e Condições</a>
-            </label>
-          </div>
-        </div>
-
-        <!-- Botão Criar Conta -->
-        <button type="submit"
-          class="w-full py-2 px-4 text-white bg-green-600 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-green-500 font-medium rounded-lg text-sm">
-          Criar Conta
-        </button>
-
-        <!-- Link para Login -->
-        <p class="text-sm font-light text-center text-gray-500">
-          Já tem uma conta? <a href="#" class="font-medium text-green-600 hover:underline">Entrar aqui</a>
-        </p>
-      </form>
-    </div>
-  </div>
-</section>
+    </form>
+</div>
 @endsection

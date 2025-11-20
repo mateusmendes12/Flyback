@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+
 class userController extends Controller
 {
     /**
@@ -28,11 +29,22 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name'=>'required',
-            'email'=>'required|email|unique:users,email',
-            'password'=>'required|min:6'
-        ]);
+         $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email|max:255',
+        'password' => 'required|string|min:6|confirmed',
+    ], [
+        'name.required' => 'O campo nome é obrigatório.',
+        'name.max' => 'O campo nome deve ter no máximo 255 caracteres.',
+        'email.required' => 'O campo e-mail é obrigatório.',
+        'email.email' => 'Digite um e-mail válido.',
+        'email.unique' => 'Esse e-mail já está cadastrado.',
+        'email.max' => 'O campo e-mail deve ter no máximo 255 caracteres.',
+        'password.required' => 'O campo senha é obrigatório.',
+        'password.min' => 'A senha deve ter no mínimo 6 caracteres.',
+        'password.confirmed' => 'As senhas não coincidem.',
+    ]);
+         
 
         $user=new User();
         $user->name=$request->name;

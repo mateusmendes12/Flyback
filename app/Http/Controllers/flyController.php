@@ -4,96 +4,112 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Fly;
+use App\Models\Departament;
 
-class flyController extends Controller
+class FlyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request)
+    protected $departaments;
+
+    public function __construct()
     {
-        $flies = Fly::paginate(10)->appends($request->except('page'));
-        //retorna também os parâmetros de busca na 
-        // paginação
-        // $pages=[];
-        // for($page=1; $page <= $flies->lastPage(); $page++){
-        //     $pages[]=$page;
+        // Disponível para create() e edit()
+        $this->departaments = Departament::all();
+    }
 
-        // }
+    /**
+     * Exibe todas as sugestões ordenadas por likes.
+     */
+    public function index()
+    {
+       $flies= Fly::all();
 
-        // pode retornar quantos likes e deslikes uma fly tem
-
-         // usa query builder
-         
         return view('flies.index', compact('flies'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Formulário de criação.
      */
     public function create()
     {
-        return view('flies.create');
-    }
-
-    public function store(Request $request)
-{
-    $request->validate([
-        'title' => 'required|string',
-        'description' => 'required|string',
-        'category' => 'required|string',
-        'status' => 'string', // opcional, se não enviado usaremos default
-    ]);
-
-    Fly::create([
-        'title' => $request->title,
-        'description' => $request->description,
-        'category' => $request->category,
-        'status' => $request->status ?? 'analysis',
-        'user_id'=> auth()->id(),
-    ]);
-
-    return redirect()->route('flies.index')
-        ->with('success', 'Fly created successfully.');
-}
-
-    public function show(Fly $fly)
-    {
-        return view('flies.show', compact('fly'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Fly $fly)
-    {
-        return view('flies.edit', compact('fly'));
-        if(!Fly::find($fly)){
-            return redirect()->route('flies.index')
-                ->with('error', 'Fly not found');
-        }
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required | text',
-            'category' => 'required|',
-            'status' => 'required|enum:analysis,approved,rejected',
+        return view('flies.create', [
+            'departaments' => $this->departaments
         ]);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Armazena uma nova Fly.
+     */
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title'          => 'required|string',
+            'description'    => 'required|string',
+            'status'         => 'nullable|string',
+            'departament_id' => 'required|exists:departaments,id',
+        ]);
+
+        $validated['user_id'] = auth()->id();
+        $validated['status']  = $validated['status'] ?? 'analysis';
+
+        Fly::create($validated);
+
+        return redirect()
+            ->route('flies.index')
+            ->with('success', 'Fly criada com sucesso.');
+    }
+
+    /**
+     * Exibe uma Fly específica.
+     */
+    public function show(Fly $fly)
+    {
+        $fly->loadCount([
+            'votes as likes_count' => fn($q) => $q->where('type_vote', 'like'),
+            'votes as dislikes_count' => fn($q) => $q->where('type_vote', 'dislike'),
+        ]);
+
+        return view('flies.show', compact('fly'));
+    }
+
+    /**
+     * Formulário de edição.
+     */
+    public function edit(Fly $fly)
+    {
+        return view('flies.edit', [
+            'fly'          => $fly,
+            'departaments' => $this->departaments
+        ]);
+    }
+
+    /**
+     * Atualiza uma sugestão.
+     */
+    public function update(Request $request, Fly $fly)
+    {
+        $validated = $request->validate([
+        'title'          => 'required|string',
+        'description'    => 'required|string',
+        'departament_id' => 'required|exists:departaments,id',
+        ]);
+
+        
+        $fly->update($validated);
+
+        return redirect()
+            ->route('flies.index')
+            ->with('success', 'Fly atualizada com sucesso.');
+    }
+
+    /**
+     * Exclui uma sugestão.
      */
     public function destroy(Fly $fly)
     {
         $fly->delete();
-        return redirect()->route('flies.index')
-            ->with('success', 'Fly deleted successfully');
+
+        return redirect()
+            ->route('flies.index')
+            ->with('success', 'Fly deletada com sucesso.');
     }
 }
