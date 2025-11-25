@@ -28,19 +28,20 @@
             ></textarea>
         </div>
         <div>
-            <label for="category" class="block text-sm font-semibold text-gray-800 mb-2">Categoria</label>
+            <label for="departament_id" class="block text-sm font-semibold text-gray-800 mb-2">Categoria</label>
             <select
-                name="category"
-                id="category"
+                name="departament_id"
+                id="departament_id"
                 required
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
             >
                 <option value="">Selecione uma categoria</option>
-                <option value="Tecnologia">Tecnologia</option>
-                <option value="Educação">Educação</option>
-                <option value="Saúde">Saúde</option>
-                <option value="Meio Ambiente">Meio Ambiente</option>
-                <option value="Outro">Outro</option>
+                        @foreach($departaments as $departament)
+                            <option value="{{ $departament->id }}">
+                                {{ $departament->name_dp }}
+                            </option>
+                        @endforeach
+
             </select>
         </div>
         <div class="flex justify-center">

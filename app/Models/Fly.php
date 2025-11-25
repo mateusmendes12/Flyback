@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\FlyVotes;
 class Fly extends Model
 {
+    protected $fillable = [
+        'title',
+        'description',
+        'status',
+        'departament_id',
+        'user_id',
+    ];
     // Relação com votos
     public function votes()
     {

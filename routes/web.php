@@ -10,6 +10,8 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
    Route::resource('flies', App\Http\Controllers\flyController::class);
    Route::post('flies/{fly}/vote', [App\Http\Controllers\VoteController::class, 'vote'])->name('flies.vote');
+   Route::get('flies/{fly}/counts', [App\Http\Controllers\FlyController::class, 'counts'])->name('flies.counts');
+
 });
 
 Route::resource('users', App\Http\Controllers\userController::class)->only([

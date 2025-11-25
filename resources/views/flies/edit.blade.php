@@ -30,21 +30,20 @@
             >{{ old('description', $fly->description) }}</textarea>
         </div>
         <div>
-            <label for="category" class="block text-sm font-semibold text-gray-800 mb-2">Categoria</label>
+            <label for="departament_id" class="block text-sm font-semibold text-gray-800 mb-2">Categoria</label>
             <select
-                name="category"
-                id="category"
+                name="departament_id"
+                id="departament_id"
                 required
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
             >
-                <option value="">Selecione uma categoria</option>
-                <option value="Tecnologia" {{ old('category', $fly->category) == 'Tecnologia' ? 'selected' : '' }}>Tecnologia</option>
-                <option value="Educação" {{ old('category', $fly->category) == 'Educação' ? 'selected' : '' }}>Educação</option>
-                <option value="Saúde" {{ old('category', $fly->category) == 'Saúde' ? 'selected' : '' }}>Saúde</option>
-                <option value="Meio Ambiente" {{ old('category', $fly->category) == 'Meio Ambiente' ? 'selected' : '' }}>Meio  Ambiente</option>
-                <option value="Outro" {{ old('category', $fly->category) == 'Outro' ? 'selected' : '' }}>Outro</option>
-            </select>
-        </div>
+                <option value="">Selecione um departamento</option>
+                @foreach($departaments as $department)
+                    <option value="{{ $department }}">
+                        {{ $department->name_dp }}
+                    </option>
+                @endforeach
+            </div>
         <div class="flex justify-center">
             <button
                 type="submit"
