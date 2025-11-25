@@ -53,3 +53,8 @@
     </form>
 
 </div>
+@section('scripts')
+ function NotReload(){
+    
+ }
+@endsection
