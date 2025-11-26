@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Fly;
 use App\Models\Departament;
+use App\Models\Contribution;
 
 class FlyController extends Controller
 {
@@ -67,8 +68,8 @@ class FlyController extends Controller
             'votes as likes_count' => fn($q) => $q->where('type_vote', 'like'),
             'votes as dislikes_count' => fn($q) => $q->where('type_vote', 'dislike'),
         ]);
-
-        return view('flies.show', compact('fly'));
+        $contributions = Contribution::where('fly_id', $fly->id)->get();
+        return view('flies.show', compact('fly'),compact('contributions'));
     }
 
     /**
@@ -93,6 +94,9 @@ class FlyController extends Controller
         'departament_id' => 'required|exists:departaments,id',
         ]);
 
+        if (!$request->has('departament_id') || empty($request->input('departament_id'))) {
+        return back()->withErrors(['departament_id' => 'Selecione o departamento, ou sua sugestão não será criada.'])->withInput();
+    }
         
         $fly->update($validated);
 

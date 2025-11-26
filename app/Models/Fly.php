@@ -31,5 +31,16 @@ class Fly extends Model
     {
         return $this->votes()->where('type_vote', 'unlike')->count();
     }
+    public function departament()
+    {
+        return $this->belongsTo(Departament::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function contributions(){
+        return $this->hasMany(Contribution::class);
+    }
 }
 
