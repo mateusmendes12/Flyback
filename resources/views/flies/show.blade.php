@@ -16,6 +16,8 @@
    
   
     </div>
-    <button>Contribuir</button>
+    <div class="max-w-3xl mx-auto p-8 bg-white rounded-xl shadow-lg mt-10">
+        <h2 class="text-2xl font-bold mb-4 text-green-600 text-center">Comentários</h2>
+        
 </div>
 @endsection
