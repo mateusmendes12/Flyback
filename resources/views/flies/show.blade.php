@@ -5,9 +5,7 @@
 @section('content')
 <div>
     <!-- Botão Contribuir no Canto Superior Direito -->
-   <a href="{{ route('contributions.create', $fly) }}" class="fixed top-4 right-4 px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-300 z-50">
-        Contribuir
-    </a>
+   
     <!-- Detalhes da Fly -->
     <div class="max-w-3xl mx-auto p-8 bg-white rounded-xl shadow-lg mt-10">
         <h1 class="text-3xl font-extrabold mb-4 text-green-600 text-center">{{ $fly->title }}</h1>
@@ -36,7 +34,14 @@
             </ul>
         @else
             <p class="text-gray-600 text-center">Nenhum comentário disponível para esta Fly.</p>
+            
         @endif
+         <div class="relative mt-8">
+            <textarea name="contribution" id="id_contribution" cols="30" rows="5" class="w-full p-4 border-2 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 resize-none placeholder-gray-500" placeholder="Adicione seu comentário..."></textarea>
+            <button type="submit" class="absolute bottom-2 right-2 py-2 px-4 m-3 bg-green-600 text-white text-sm rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+                Enviar
+            </button>
+        </div>
     </div>
 </div>
 @endsection
