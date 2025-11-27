@@ -27,7 +27,7 @@
                 @foreach($contributions as $contribution)
                     <li class="border border-gray-300 rounded-lg p-4">
                         <h3 class="text-lg font-semibold text-gray-800">{{ $contribution->title }}</h3>
-                        <p class="text-gray-700 mt-2">{{ $contribution->description }}</p>
+                        <p class="text-gray-700 mt-2">{{ $contribution->content }}</p>
                         <p class="text-sm text-gray-500 mt-2">Comentado em: {{ $contribution->created_at->format('d/m/Y H:i') }}</p>
                     </li>
                 @endforeach

@@ -40,7 +40,7 @@ class Fly extends Model
         return $this->belongsTo(User::class);
     }
     public function contributions(){
-        return $this->hasMany(Contribution::class);
+        return $this->hasOne(Contribution::class);
     }
 }
 
