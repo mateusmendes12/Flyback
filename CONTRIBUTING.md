@@ -134,8 +134,4 @@ Para discussões rápidas ou dúvidas, use issues ou o canal de comunicação de
 
 Obrigado por contribuir com o Flyback — mesmo pequenas correções e melhorias fazem grande diferença.
 
----
 
-Se quiser, eu também:
-- adiciono templates para `ISSUE_TEMPLATE` e `PULL_REQUEST_TEMPLATE` em `.github/`;
-- configuro `phpcs.xml` e um `make` ou scripts `composer` para comandos úteis.
