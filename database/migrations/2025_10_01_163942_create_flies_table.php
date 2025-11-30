@@ -16,13 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->enum('status', ['analysis', 'approved', 'rejected'])->default('analysis');
-<<<<<<< HEAD
-            
-           
-=======
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null'); // opcional
             $table->foreignId('departament_id')->constrained()->onDelete('cascade');
->>>>>>> origin/main
             $table->timestamps();   
         });
     }

@@ -13,10 +13,7 @@ return new class extends Migration
     {
         Schema::create('contributions', function (Blueprint $table) {
             $table->id();
-<<<<<<< HEAD
-=======
          
->>>>>>> origin/main
             $table->text('content');
             $table->foreignId('fly_id')->constrained()->onDelete('cascade');
             $table->timestamps();

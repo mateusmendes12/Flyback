@@ -4,12 +4,7 @@
 
 @section('content')
 <div>
-<<<<<<< HEAD
-    <!-- Botão Contribuir no Canto Superior Direito -->
-   
-=======
 
->>>>>>> origin/main
     <!-- Detalhes da Fly -->
     <div class="max-w-3xl mx-auto p-8 bg-white rounded-xl shadow-lg mt-10">
         <h1 class="text-3xl font-extrabold mb-4 text-green-600 text-center">{{ $fly->title }}</h1>
@@ -31,11 +26,7 @@
                 @foreach($contributions as $contribution)
                     <li class="border border-gray-300 rounded-lg p-4">
                         <h3 class="text-lg font-semibold text-gray-800">{{ $contribution->title }}</h3>
-<<<<<<< HEAD
                         <p class="text-gray-700 mt-2">{{ $contribution->content }}</p>
-=======
-                        <p class="text-gray-700 mt-2">{{ $contribution->message }}</p>
->>>>>>> origin/main
                         <p class="text-sm text-gray-500 mt-2">Comentado em: {{ $contribution->created_at->format('d/m/Y H:i') }}</p>
                     </li>
                 @endforeach
@@ -44,17 +35,15 @@
             <p class="text-gray-600 text-center">Nenhum comentário disponível para esta Fly.</p>
             
         @endif
-<<<<<<< HEAD
-         <div class="relative mt-8">
+        <form action="{{ route('contributions.store',$fly,false) }}" method="post">
+            @csrf
+             <div class="relative mt-8">
             <textarea name="contribution" id="id_contribution" cols="30" rows="5" class="w-full p-4 border-2 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 resize-none placeholder-gray-500" placeholder="Adicione seu comentário..."></textarea>
             <button type="submit" class="absolute bottom-2 right-2 py-2 px-4 m-3 bg-green-600 text-white text-sm rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
                 Enviar
             </button>
         </div>
-=======
-        
-        
->>>>>>> origin/main
+        </form>
     </div>
                
 </div>

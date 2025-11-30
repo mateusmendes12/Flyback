@@ -3,57 +3,43 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Fly;
+use App\Models\Contribution;
 
 class ContributionController extends Controller
 {
-<<<<<<< HEAD
-    public function store(Request $request, $flyId)
-        {
-             $request->validate([
+    public function store(Request $request, Fly $fly)
+    {
+        $request->validate([
+            'contribution' => 'required|string',
+        ]);
+
+        $contribution = Contribution::create([
+            'fly_id' => $fly->id,
+            'user_id' => auth()->id(), // usuário autenticado
+            'content' => $request->contribution
+        ]);
+
+        return redirect()->back()->with('success', 'Contribuição criada com sucesso!');
+    }
+
+    public function update(Request $request, Contribution $contribution)
+    {
+        $request->validate([
             'content' => 'required|string',
         ]);
 
-        Fly::findOrFail($flyId); // garante que o Fly exista
-
-        $contribution = Contribution::create([
-            'fly_id' => $flyId,
-            'user_id' => auth()->id(), // usuário autenticado
-            'content' => $request->message
+        $contribution->update([
+            'content' => $request->content,
         ]);
 
-        return response()->json([
-            'content' => 'Contribuição criada com sucesso!',
-            'data' => $contribution
-=======
-    
-    public function store(Request $request, $flyId)
-    {
-        // Validate and store the new contribution for the specified fly
-        $request->validate([
-            'content' => 'required|string|max:1000',
->>>>>>> origin/main
-        ]);
+        return redirect()->back()->with('success', 'Contribuição atualizada!');
     }
 
-    public function update(Request $request, $contributionId)
+    public function destroy(Contribution $contribution)
     {
-        // Validate and update the specified contribution
-<<<<<<< HEAD
-            $request->validate([
-                'content' => 'required|string',
-            ]);
-            // Lógica para atualizar a contribuição com ID $contributionId
+        $contribution->delete();
 
-=======
->>>>>>> origin/main
-    }
-
-    public function destroy($contributionId)
-    {
-        // Delete the specified contribution
-<<<<<<< HEAD
-        Contributtion::findOrFail($contributionId)->delete();
-=======
->>>>>>> origin/main
+        return redirect()->back()->with('success', 'Contribuição deletada!');
     }
 }
