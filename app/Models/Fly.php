@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Fly extends Model
 { 
@@ -15,7 +16,7 @@ class Fly extends Model
         'departament_id',
         ];
     // Relação com votos
-    public function votes()
+    public function votes():HasMany
     {
         return $this->hasMany(FlyVotes::class);
     }

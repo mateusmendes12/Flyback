@@ -11,8 +11,12 @@ Route::middleware([\Illuminate\Auth\Middleware\Authenticate::class])->group(func
    Route::resource('flies', App\Http\Controllers\flyController::class);
    Route::post('flies/{fly}/vote', [App\Http\Controllers\VoteController::class, 'vote'])->name('flies.vote');
 
+<<<<<<< HEAD
 
    
+=======
+    
+>>>>>>> origin/main
    Route::post('flies/{fly}/contributions', [App\Http\Controllers\ContributionController::class, 'store'])->name('contributions.store');
    Route::put('contributions/{contribution}', [App\Http\Controllers\ContributionController::class, 'update'])->name('contributions.update');
    Route::delete('contributions/{contribution}', [App\Http\Controllers\ContributionController::class, 'destroy'])->name('contributions.destroy');
