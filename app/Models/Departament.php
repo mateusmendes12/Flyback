@@ -8,7 +8,7 @@ class Departament extends Model
 {
  
     protected $fillable = [
-        'name',
+        'name_dp',
         'description',
         'email_institucional',
         'telefone',

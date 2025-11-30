@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->enum('status', ['analysis', 'approved', 'rejected'])->default('analysis');
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null'); // opcional
-         
+            $table->foreignId('departament_id')->constrained()->onDelete('cascade');
             $table->timestamps();   
         });
     }
