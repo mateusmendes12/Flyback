@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\flyController;
+use App\Http\Controllers\userController;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');

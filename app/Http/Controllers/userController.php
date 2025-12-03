@@ -23,6 +23,7 @@ class userController extends Controller
         return view('users.create');
     }
 
+
     /**
      * Store a newly created resource in storage.
      */
@@ -73,10 +74,39 @@ class userController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
-    {
-        //
+   public function update(Request $request, User $user)
+{
+    // Validação
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255|unique:users,email,'.$user->id,
+        'password' => 'nullable|string|min:6|confirmed', // senha opcional
+    ], [
+        'name.required' => 'O campo nome é obrigatório.',
+        'name.max' => 'O campo nome deve ter no máximo 255 caracteres.',
+        'email.required' => 'O campo e-mail é obrigatório.',
+        'email.email' => 'Digite um e-mail válido.',
+        'email.unique' => 'Esse e-mail já está cadastrado.',
+        'email.max' => 'O campo e-mail deve ter no máximo 255 caracteres.',
+        'password.min' => 'A senha deve ter no mínimo 6 caracteres.',
+        'password.confirmed' => 'A confirmação da senha não confere.',
+    ]);
+
+    // Atualizar campos
+    $user->name = $request->name;
+    $user->email = $request->email;
+
+    // Atualizar senha apenas se preenchida
+    if ($request->filled('password')) {
+        $user->password = bcrypt($request->password);
     }
+
+    $user->save();
+
+    return redirect()->route('users.edit', $user)
+                     ->with('success', 'Perfil atualizado com sucesso.');
+}
+
 
     /**
      * Remove the specified resource from storage.

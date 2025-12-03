@@ -59,7 +59,13 @@
                 <div x-show="open" x-transition
                      class="absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg z-50">
                   <ul class="py-2 text-sm text-gray-700">
-                    <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Editar Perfil</a></li>
+                   
+                                    <li>
+                                      <a href="{{ route('users.edit', auth()->user()) }}"
+                  class="block px-4 py-2 hover:bg-gray-100">
+                  Editar Perfil
+                </a>
+                  </li>
                     <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Configurações</a></li>
                     <li>
                       <form method="POST" action="{{ route('logout', [], false) }}">
