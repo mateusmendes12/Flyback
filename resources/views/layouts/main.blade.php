@@ -86,6 +86,11 @@
                 <button type="submit" class="block w-full text-left py-2 px-3 hover:text-green-600">Sair</button>
               </form>
             </li>
+            <li class="block md:hidden border-t pt-2 mt-2">
+            <li class="block md:hidden border-t pt-2 mt-2">
+                <a href="{{ route('users.edit', auth()->user()) }}" class="block py-2 px-3 hover:text-green-600">Editar Perfil</a>
+            </li>
+            </li>
           @endauth
 
           @guest
