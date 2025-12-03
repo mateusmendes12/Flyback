@@ -16,7 +16,7 @@
         </div>
     @endif
 
-    <form action="{{ route('flies.store') }}" method="POST" class="space-y-6">
+    <form action="{{ route('flies.store',[],false), }}" method="POST" class="space-y-6">
         @csrf
         <div>
             <label for="title" class="block text-sm font-semibold text-gray-800 mb-2">Título</label>

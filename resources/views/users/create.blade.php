@@ -73,7 +73,7 @@
 
         <!-- Link para Login -->
         <p class="text-sm font-light text-center text-gray-500">
-          Já tem uma conta? <a href="#" class="font-medium text-green-600 hover:underline">Entrar aqui</a>
+          Já tem uma conta? <a href="{{ route('login',[],false) }}" class="font-medium text-green-600 hover:underline">Entrar aqui</a>
         </p>
       </form>
     </div>
