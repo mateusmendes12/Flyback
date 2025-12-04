@@ -17,7 +17,7 @@
    <div class="relative pb-[56.25%] max-w-5xl mx-auto">
         <iframe 
             class="absolute top-0 left-0 w-full h-full"
-            src="https://www.youtube.com/embed/6xcP2EneJVA?si=Pw71eHPDq2cLhwzZ%22"
+            src="https://www.youtube.com/embed/Y6ryCKmt9Y4?si=SGTWX9h9NRfXRfEK%22"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
